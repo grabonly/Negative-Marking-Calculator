@@ -5,5 +5,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()]
+  integrations: [tailwind()],
+  site: 'https://grabonly.github.io/Negative-Marking-Calculator/',
+  base: 'Negative-Marking-Calculator',
 });
