@@ -1,0 +1,103 @@
+---
+
+---
+
+<div class="text-center mb-2 text-emerald-900">UPSC, RRB, NEET, UPPSC, BPSC, UPSSSC</div>
+    <div class="max-w-sm mx-auto bg-white p-4 rounded-lg shadow">
+        <label>Total Questions</label>
+        <input id="totalQuestions" type="number" set:text="12" class="w-full p-2 mb-2 border border-gray-300 rounded">
+
+        <label>Max Marks</label>
+        <input id="maxMarks" type="number" class="w-full p-2 mb-2 border border-gray-300 rounded">
+
+        <label>Questions Attempted</label>
+        <input id="questionsAttempted" type="number" class="w-full p-2 mb-2 border border-gray-300 rounded">
+
+        <label>Wrong Questions</label>
+        <input id="wrongQuestions" type="number" class="w-full p-2 mb-2 border border-gray-300 rounded">
+
+        <label>Negative Marking Ratio</label>
+        <select id="negativeRatio" class="w-full p-2 mb-2 border border-gray-300 rounded">
+            <option value="1">1/1</option>
+            <option value="2">1/2</option>
+            <option value="3">1/3</option>
+            <option value="4">1/4</option>
+            <option value="5">1/5</option>
+            <option value="6">1/6</option>
+            <option value="7">1/7</option>
+            <option value="noNegative">No Negative</option>
+        </select>
+
+        <div class="flex justify-between mt-4">
+            <span class="font-bold">Final Score:</span>
+            <span id="finalScore" class="text-blue-600"><strong>0</strong></span>
+        </div>
+
+        <div class="mt-4 flex justify-between">
+            <button id="calcBtn"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Calculate</button>
+            <button id="clear"
+                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("#calcBtn")?.addEventListener("click", calculate);
+        document.querySelector("#clear")?.addEventListener("click", clearFields);
+
+        function getInputValue(prop: string): string {
+            return (document.getElementById(prop) as HTMLInputElement )?.value;
+        }
+        
+        function setInputValue(id: string, value:string) {
+             (document.getElementById(id) as HTMLInputElement ).value = value;
+        }
+
+        function calculate() {
+            console.log("hi");
+            // const totalQuestions = parseFloat(getInputValue('totalQuestions'));
+            const maxMarks = parseFloat(getInputValue('maxMarks'));
+            // const questionsAttempted = parseFloat(getInputValue('questionsAttempted'));
+            const wrongQuestions = parseFloat(getInputValue('wrongQuestions'));
+            const negativeRatio = getInputValue('negativeRatio');
+
+            let negativeMarks = 0;
+            switch (negativeRatio) {
+                case '1':
+                    negativeMarks = wrongQuestions;
+                    break;
+                case '2':
+                    negativeMarks = wrongQuestions * 0.5;
+                    break;
+                case '3':
+                    negativeMarks = wrongQuestions * 0.33;
+                    break;
+                case '4':
+                    negativeMarks = wrongQuestions * 0.25;
+                    break;
+                case '5':
+                    negativeMarks = wrongQuestions * 0.2;
+                    break;
+                case '6':
+                    negativeMarks = wrongQuestions * 0.17;
+                    break;
+                case '7':
+                    negativeMarks = wrongQuestions * 0.14;
+                    break;
+                case 'noNegative':
+                    negativeMarks = wrongQuestions;
+                    break;
+            }
+
+            const finalScore = maxMarks - negativeMarks;
+            document.getElementById('finalScore')!!.innerHTML = "<strong>" + finalScore.toFixed(2) + "</strong>";
+        }
+
+        function clearFields() {
+            setInputValue('totalQuestions', "");
+            setInputValue('maxMarks', "");
+            setInputValue('questionsAttempted', "");
+            setInputValue('wrongQuestions', "");
+            document.querySelector('#finalScore')!!.textContent = '0';
+        }
+    </script>
