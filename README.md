@@ -1,4 +1,4 @@
-[https://grabonly.github.io/Negative-Marking-Calculator/](https://grabonly.github.io/Negative-Marking-Calculator/)
+[Negative Marks Calculator](https://grabonly.github.io/Negative-Marking-Calculator/)
 
 # Astro Starter Kit: Basics
 
